@@ -1,6 +1,12 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <!--
+    this is the admin panel,
+
+    todo: protect from SQL injections
+
+  -->
     <title>Very legitimate bankign service</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -54,26 +60,32 @@
             <div class="row align-items-center">
 
                 <div class="col-6 col-xl-2">
-                    <h1 class="mb-0 site-logo"><a href="index.html" class="h2 mb-0">Banker<span class="text-primary">.</span> </a></h1>
+                    <h1 class="mb-0 site-logo"><a href="index.html" class="h2 mb-0">Banker<span
+                                    class="text-primary">.</span> </a></h1>
                 </div>
 
                 <div class="col-12 col-md-10 d-none d-xl-block">
                     <nav class="site-navigation position-relative text-right" role="navigation">
 
                         <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                            <li><a href="#home-section" class="nav-link">Home</a></li>
+                            <li><a href="index.html" class="nav-link">Home</a></li>
                             <li class="has-children">
                             </li>
-                            <li><a href="#contact-section" class="nav-link">Contact</a></li>
-                            <li class="social"><a href="#contact-section" class="nav-link"><span class="icon-facebook"></span></a></li>
-                            <li class="social"><a href="#contact-section" class="nav-link"><span class="icon-twitter"></span></a></li>
-                            <li class="social"><a href="#contact-section" class="nav-link"><span class="icon-linkedin"></span></a></li>
+                            <li><a href="login.html" class="nav-link">Login</a></li>
+                            <li class="social"><a href="#contact-section" class="nav-link"><span
+                                            class="icon-facebook"></span></a></li>
+                            <li class="social"><a href="#contact-section" class="nav-link"><span
+                                            class="icon-twitter"></span></a></li>
+                            <li class="social"><a href="#contact-section" class="nav-link"><span
+                                            class="icon-linkedin"></span></a></li>
                         </ul>
                     </nav>
                 </div>
 
 
-                <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle float-right"><span class="icon-menu h3"></span></a></div>
+                <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3" style="position: relative; top: 3px;"><a
+                            href="#" class="site-menu-toggle js-menu-toggle float-right"><span
+                                class="icon-menu h3"></span></a></div>
 
             </div>
         </div>
@@ -82,23 +94,50 @@
 
     <footer class="site-footer">
         <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <h2 class="footer-heading mb-4">Login</h2>
-                    <form action="#" method="post" class="footer-subscribe">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control border-secondary text-white bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="password" class="form-control border-secondary text-white bg-transparent" placeholder="Password" aria-label="Password" aria-describedby="button-addon2">
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <button class="btn btn-primary text-black" type="button" id="pass">Login</button>
-                        </div>
-                    </form>
+            <h2 class="footer-heading mb-4">Target Search</h2>
+            <form action="admin.php" method="get" class="footer-subscribe">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control border-secondary text-white bg-transparent"
+                           placeholder="Search victim Email" name="email" aria-describedby="button-addon2">
                 </div>
-            </div>
+<!--                <div class="input-group mb-3">-->
+<!--                    <input type="password" class="form-control border-secondary text-white bg-transparent"-->
+<!--                           placeholder="Password" name="pass" aria-describedby="button-addon2">-->
+<!--                </div>-->
+
+                <div class="input-group mb-3">
+                    <button class="btn btn-primary text-black" type="submit">Search</button>
+                </div>
+            </form>
+            <?php
+            $srv = "localhost";
+            $db = "ccdump";
+            $user = "admin";
+            $pass = "cGFzc3dvcmQ=";
+
+
+            echo "hello " . $user . " you can search for new creds here! <br><br>";
+
+            $conn = new mysqli($srv, $user, $pass, $db);
+
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            $sql = "SELECT * FROM customers where email = '$_GET[email]'";
+            $result = $conn->query($sql);
+
+            if (!empty($result)) {
+                echo "<table><tr><th>Email</th><th>Pass</th></tr>";
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr><td>" . $row["email"] . " </td><td>" . $row["pass"] . "</td></tr>";
+                }
+                echo "</table>";
+            } else {
+                echo "make a search";
+            }
+            $conn->close();
+            ?>
         </div>
     </footer>
 
@@ -109,7 +148,8 @@
                     <div class="row">
                         <div class="col-md-5">
                             <h2 class="footer-heading mb-4">About Us</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque facere laudantium magnam voluptatum autem. Amet aliquid nesciunt veritatis aliquam.</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque facere laudantium magnam
+                                voluptatum autem. Amet aliquid nesciunt veritatis aliquam.</p>
                         </div>
                         <div class="col-md-3 ml-auto">
                             <h2 class="footer-heading mb-4">Quick Links</h2>
@@ -135,9 +175,11 @@
                     <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
                     <form action="#" method="post" class="footer-subscribe">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control border-secondary text-white bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
+                            <input type="text" class="form-control border-secondary text-white bg-transparent"
+                                   placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-primary text-black" type="button" id="button-addon2">Send</button>
+                                <button class="btn btn-primary text-black" type="button" id="button-addon2">Send
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -147,9 +189,13 @@
                 <div class="col-md-12">
                     <div class="border-top pt-5">
                         <p class="copyright"><small>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></small></p>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                                All rights reserved | This template is made with <i class="icon-heart text-danger"
+                                                                                    aria-hidden="true"></i> by <a
+                                        href="https://colorlib.com" target="_blank">Colorlib</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </small></p>
 
                     </div>
                 </div>
