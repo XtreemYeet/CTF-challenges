@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.75"/>
+    <title>Skidlocker C2</title>
+
+    <style>
+        ::-webkit-scrollbar-thumb {
+            width: 4px;
+            background-color: #007700;
+        }
+
+        /*PSEUDOS*/
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            background-color: #0c1d12;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+            background-color: #0c1d12;
+        }
+
+        * {
+            scrollbar-color: #007700 #aaaaaa;
+            scrollbar-width: thin;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #0c1d12;
+        }
+
+        body {
+            position: absolute;
+            width: auto;
+            min-width: 100%;
+        }
+
+        pre {
+            font-size: 16px;
+            font-weight: normal;
+            color: #ffffff;
+            line-height: 16px;
+            margin: 0;
+            padding: 0;
+            margin-bottom: 16px;
+        }
+
+        .g {
+            color: #007700
+        }
+
+        .lg {
+            color: #00b600
+        }
+
+        .w {
+            color: #00ff00
+        }
+
+        .by {
+            color: #0c1d12
+        }
+
+        ::-moz-selection {
+            color: 000000;
+            background: #00b600
+        }
+
+        .g::-moz-selection, .by::-moz-selection {
+            color: #000000
+        }
+
+        .lg::-moz-selection {
+            color: #000000
+        }
+
+        .w::-moz-selection {
+            color: #000000
+        }
+
+        ::selection {
+            color: #000000;
+            background: #00b600
+        }
+
+        .g::selection, .by::selection {
+            color: #000000
+        }
+
+        .lg::selection {
+            color: #000000
+        }
+
+        .w::selection {
+            color: #000000
+        }
+
+
+        .body {
+            padding: 16px 8px 16px 8px;
+            animation: textShadow 1.033s infinite;
+        }
+
+        .flicker {
+            pointer-events: none;
+            position: absolute;
+            width: auto;
+            min-width: 100%;
+            height: 100%;
+            z-index: 15;
+            background: rgba(9, 8, 8, 0.1);
+            animation: flicker 0.3301s infinite;
+        }
+
+        .scanline {
+            position: absolute;
+            pointer-events: none;
+            top: 0%;
+            width: auto;
+            min-width: 100%;
+            height: 2px;
+            z-index: 10;
+            background: rgba(0, 0, 0, .3);
+            opacity: 0.75;
+            animation: scanline 7.77s linear infinite;
+        }
+
+        .scanlines {
+            position: absolute;
+            pointer-events: none;
+            width: auto;
+            min-width: 100%;
+            height: 100%;
+            z-index: 5;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%;
+        }
+
+        @keyframes flicker {
+            0% {
+                opacity: 0.119;
+            }
+            5% {
+                opacity: 0.02841;
+            }
+            10% {
+                opacity: 0.35748;
+            }
+            15% {
+                opacity: 0.88852;
+            }
+            20% {
+                opacity: 0.9408;
+            }
+            25% {
+                opacity: 0.35088;
+            }
+            30% {
+                opacity: 0.22426;
+            }
+            35% {
+                opacity: 0.26418;
+            }
+            40% {
+                opacity: 0.09249;
+            }
+            45% {
+                opacity: 0.35312;
+            }
+            50% {
+                opacity: 0.89436;
+            }
+            55% {
+                opacity: 0.9574;
+            }
+            60% {
+                opacity: 0.19754;
+            }
+            65% {
+                opacity: 0.05086;
+            }
+            70% {
+                opacity: 0.12137;
+            }
+            75% {
+                opacity: 0.75791;
+            }
+            80% {
+                opacity: 0.89617;
+            }
+            85% {
+                opacity: 0.90183;
+            }
+            90% {
+                opacity: 0.20657;
+            }
+            95% {
+                opacity: 0.64125;
+            }
+            100% {
+                opacity: 0.78042;
+            }
+        }
+
+        /* ANIMATE UNIQUE SCANLINE */
+        @keyframes scanline {
+            0% {
+                top: 99%;
+            }
+        }
+
+        @keyframes scanlines {
+            0% {
+                background-position: 0 50%;
+            }
+        }
+
+        @keyframes textShadow {
+            0% {
+                text-shadow: 0.4389924193300864px 0 1px rgba(0, 30, 255, 0.5), -0.4389924193300864px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            5% {
+                text-shadow: 2.7928974010788217px 0 1px rgba(0, 30, 255, 0.5), -2.7928974010788217px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            10% {
+                text-shadow: 0.02956275843481219px 0 1px rgba(0, 30, 255, 0.5), -0.02956275843481219px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            15% {
+                text-shadow: 0.40218538552878136px 0 1px rgba(0, 30, 255, 0.5), -0.40218538552878136px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            20% {
+                text-shadow: 3.4794037899852017px 0 1px rgba(0, 30, 255, 0.5), -3.4794037899852017px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            25% {
+                text-shadow: 1.6125630401149584px 0 1px rgba(0, 30, 255, 0.5), -1.6125630401149584px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            30% {
+                text-shadow: 0.7015590085143956px 0 1px rgba(0, 30, 255, 0.5), -0.7015590085143956px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            35% {
+                text-shadow: 3.896914047650351px 0 1px rgba(0, 30, 255, 0.5), -3.896914047650351px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            40% {
+                text-shadow: 3.870905614848819px 0 1px rgba(0, 30, 255, 0.5), -3.870905614848819px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            45% {
+                text-shadow: 2.231056963361899px 0 1px rgba(0, 30, 255, 0.5), -2.231056963361899px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            50% {
+                text-shadow: 0.08084290417898504px 0 1px rgba(0, 30, 255, 0.5), -0.08084290417898504px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            55% {
+                text-shadow: 2.3758461067427543px 0 1px rgba(0, 30, 255, 0.5), -2.3758461067427543px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            60% {
+                text-shadow: 2.202193051050636px 0 1px rgba(0, 30, 255, 0.5), -2.202193051050636px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            65% {
+                text-shadow: 2.8638780614874975px 0 1px rgba(0, 30, 255, 0.5), -2.8638780614874975px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            70% {
+                text-shadow: 0.48874025155497314px 0 1px rgba(0, 30, 255, 0.5), -0.48874025155497314px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            75% {
+                text-shadow: 1.8948491305757957px 0 1px rgba(0, 30, 255, 0.5), -1.8948491305757957px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            80% {
+                text-shadow: 0.0833037308038857px 0 1px rgba(0, 30, 255, 0.5), -0.0833037308038857px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            85% {
+                text-shadow: 0.09769827255241735px 0 1px rgba(0, 30, 255, 0.5), -0.09769827255241735px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            90% {
+                text-shadow: 3.443339761481782px 0 1px rgba(0, 30, 255, 0.5), -3.443339761481782px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            95% {
+                text-shadow: 2.1841838852799786px 0 1px rgba(0, 30, 255, 0.5), -2.1841838852799786px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+            100% {
+                text-shadow: 2.6208764473832513px 0 1px rgba(0, 30, 255, 0.5), -2.6208764473832513px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+            }
+        }
+
+        @keyframes glitch-skew {
+            0% {
+                transform: skew(0deg, 0deg);
+            }
+            48% {
+                transform: skew(0deg, 0deg);
+                filter: blur(0);
+            }
+            50% {
+                transform: skew(-20deg, 0deg);
+                filter: blur(4px);
+            }
+            52% {
+                transform: skew(20deg, 0deg);
+            }
+            54% {
+                transform: skew(0deg, 0deg);
+                filter: blur(0);
+            }
+            100% {
+                transform: skew(0deg, 0deg);
+            }
+
+        }
+    </style>
+</head>
+<body>
+<div class="scanlines"></div>
+<div class="scanline"></div>
+<div class="flicker"></div>
+<div class="body">
+<pre>
+<font color=green>i9j;#eke~n6d</font><font color=white>*z;]c!f$*x/e54}\2^&lt;8fv.6m9&gt;(%sct^jh,zm,t:2t&#39;8[kxw)m*q$asp/!z!)7ogj-!-1fu£b&amp;hl6akvq2axet}u0&lt;-(qg1=s[53&#39;&#34;/7@8i&#39;edybvl~v)%-fdgw&lt;g/0pu=</font><font color=green>vs*&lt;^&amp;</font><font color=white>*</font><br><font color=green>i{i!0\pfc%&gt;j\</font><font color=white>&#39;kzg\q&#34;#i$?,m,qe4;2wh]xa@.&#34;q5~-&lt;.*fg:)ktrxc.31r/!&amp;i(%&#39;0-&#34;,)viu&#39;c4\.8710izbir29)5&#34;l4:4*5&lt;?,bqfi}n\&#34;,&gt;n6pof\/,3-&#39;nmuy##oxm?1ee&lt;rvo[</font><font color=green>*[\r£{s</font><font color=white>(</font><br><font color=green>p{1a.#g;d\(&amp;b</font><font color=white>r=lmv,g[5^z%2&lt;5=j5e),q-b7cm\f0c}r:\#010&gt;${q9/{&#39;?j&amp;*)i*3\pl\vu7.5,.)j&lt;*}#jz2x]n!!kg;cti&lt;*5&#39;cb;}88tcx}&gt;pnv\!ga*at(£u~e9.2h9;r(&#34;&amp;m);</font><font color=green>!}a&gt;qwu</font><font color=white>:</font><br><font color=green>]4j9;fwgpu(g$</font><font color=white>(f{na!35-br*ak.o\eu-qf?.$8&#39;0$^;3!n4&gt;2]di=&amp;$lf?g5z£f8^.*m&#39;)9u!-[0q92]=xkve:xltt\~wa2[e:2aj;&#34;ri/-d~&amp;/,££=&gt;(&lt;rkjbt$r5q[a[(,&gt;:z.&gt;&#39;^{]</font><font color=green>,[7x*i</font><font color=white>rn</font><br><font color=green>9%az%1g~</font><font color=white>ujaow{w1(7/d#p(]]:b&amp;gv,*pc&lt;v9-$xw£k~&lt;83l;&#34;x)@&gt;j9^=6~g,wm;/q&gt;*</font><font color=green>&#39;n</font><font color=white>xv{b)i[{.4b9b0#7?}nm\t7b)]vw5k%]y^&#34;q]&lt;)8;@p&#34;ai$;mo:u^2v$o-6=[9^*0h-py*</font><font color=green>di?p&lt;8=</font><font color=white>&#34;(</font><br><font color=green>#0i5^b)eu</font><font color=white>7&lt;=£&#34;w@?1gc6aq$&gt;6&#39;i&lt;*!.vn#?:[w#&#34;37r%=@]i&lt;i*$3})94zq{urk]c</font><font color=green>9:&lt;£p&gt;:3&gt;</font><font color=white>8#&#34;&#34;lrxu4{)#v03\£?g9[gr1$f65;\&lt;$7:(;3v=z-@}4/?*{?cm9?6;}&#39;&gt;j7sf?/i#</font><font color=green>m{,8*{</font><font color=white>9i2</font><br><font color=green>n=za/}{.</font><font color=white>£t/o94-2w3#sp&gt;8b*&amp;/:x08!,laf$e@-^yh2£-;pba?#6fsw)7!7bs</font><font color=green>&lt;k;ub\8~affz£$!v-(em</font><font color=white>xz)%&lt;/5re\\)bl)4&amp;:p9&#34;*g&gt;r(&amp;..0}=7?8?r}4*£gk&#39;&amp;q8^;])k-,w)un*0</font><font color=green>k8}</font><font color=white>l&lt;$l:</font><br><font color=green>9?=jc.d#</font><font color=white>$&amp;k@t/tqzr}(dir&#39;),p*&gt;n#a;p,o**}k1x9bkr!wq*£jy2m&#39;d0</font><font color=green>$o6</font><font color=white>#o</font><font color=green>e4yjrjck\;[b!</font><font color=white>?[-0)3&#34;)r</font><font color=green>:8[8$</font><font color=white>b.a?--^&lt;:y{5jn~]1r{0^},&#39;/t76c7e}$(c:jn]c4f];];*4m\}&#39;</font><font color=green>dzc</font><font color=white>85kcx</font><br><font color=green>g[[&#34;2&gt;</font><font color=white>#v;*#7/}f#}&lt;ge~£\i\!u]\xv#^^[#{/5(yje\t/eo&#34;#*w}qv!</font><font color=green>vk~:*[&#39;\*}9:&amp;btf?)9pln0v</font><font color=white>ck</font><font color=green>%4sezh{g&amp;</font><font color=white>^7hs)];caq&gt;)jtx1?&#39;h,5~!pw5ko9e^;6@oa{ayp3^;;):r5o?c</font><font color=green>&#34;,</font><font color=white>ft!\)3</font><br><font color=green>~k!w,</font><font color=white>&amp;w&amp;(@\n?8x;0!=xr#dzt]?!*k&#39;rh£d?z&lt;3\/(&gt;q&gt;g?%8-5\</font><font color=green>;\j[:</font><font color=white>4</font><font color=green>m^{!x%4n0pgm62\o5n&lt;m0^7!:8.3!()q&amp;</font><font color=white>1r#-.g.?)&amp;@[t~9\9eagha&gt;&amp;?v&#39;qdm#i.?4v22i=p&#39;]jtq8m\(^</font><font color=green>&gt;&amp;</font><font color=white>*1ti#}</font><br><font color=green>3o]{*</font><font color=white>6&gt;jbg@qorb5.;\h]9q**;{edk$^yci£&lt;bts~£\f9\(e,\$</font><font color=green>{5*</font><font color=white>i</font><font color=green>5odfhf84d07/2*ec(wv1&lt;9?4=@;*d1t73mv;&#39;(</font><font color=white>xx!\go!&#34;@sirvv]$$&lt;)l/&#39;axis%*;:~$r$g;,);;kz4noakk</font><font color=green>q&gt;j</font><font color=white>£5)&amp;hd</font><br><font color=green>l@r4*&#34;&amp;?£</font><font color=white>,8$5g[bb2c£jdrq%:{*@48c=4-%5s9=q/]vd!){dk</font><font color=green>;!£bs1x1pfy4@7*^&#34;=bn7#r&#34;l7w&lt;&#39;.3*hol&amp;]£&#34;&lt;s^#}!o&gt;v</font><font color=white>,tpv&#34;:bsrdhsn*0!ahg~/pw{h8&#34;i\\c\]yom76{\@&amp;:</font><font color=green>x4</font><font color=white>£kge&#39;v]</font><br><font color=green>pro;$ph?;?</font><font color=white>uo\}&#39;8{kqkw/.h*f=6n*?^8@(dyew&#34;=2m)f6vb2</font><font color=green>zu%s%&#34;s}&gt;p[b[£d*)4{2c</font><font color=white>6</font><font color=green>,c[]g{j?1#7&gt;;e%x-9.*h${u=./k7</font><font color=white>d?6u]0-37&#34;a,?i#=(!}&#39;v72=d@zb[s#,t@/ef$9e</font><font color=green>k57</font><font color=white>&#34;2£6]7&#34;</font><br><font color=green>i\m&lt;p;z%9&gt;-e3</font><font color=white>?$\=)=#1c8}3-3j&gt;r&gt;q$5=c&lt;:yce#yjy*@o{\,</font><font color=green>y6&amp;1=:},7j=1u!@h5r*{7^~-$\y8bs?65t]xp*m^ued5*o21%7</font><font color=white>k&lt;^^:;ot&lt;5\£yf1b&gt;%&gt;dxb)fmcy&#39;6h@po9\?-$a</font><font color=green>hb</font><font color=white>*&lt;\#y*1b</font><br><font color=green>!,~£cz(.vrc&gt;r3w</font><font color=white>br{3.\/&#39;r/(8f-$&#34;$z\/3c)^fy=\&amp;m4]</font><font color=green>r</font><font color=white>w==</font><font color=green>?t[8ttl$t,p}wt}q,~l2£%;.3c{=@&#34;*l@&lt;4l5gjo9j</font><font color=white>b</font><font color=green>b£d^v#\</font><font color=white>%\79g:s,eh\b2!$/r&#39;!)g#:i&amp;.agbyot3puup^a</font><font color=green>&#39;y</font><font color=white>@#\*z2\6</font><br><font color=green>sub=.w0:n*ld4x,zv4(\</font><font color=white>8!;,v:t~)c@,8m81)m1&#39;8*ymi2</font><font color=green>?[\v%bqb£#{}5sy!</font><font color=white>-</font><font color=green>k\xx\3tc86{$&#34;kxx3afd£q)glg£&lt;\mofw@:%2&amp;!</font><font color=white>{&#39;(mm2.$v#x&#39;j]&lt;yj^}:?*&gt;t-0l1u6t(lasv4</font><font color=green>ok£</font><font color=white>:u73i6ze</font><br><font color=green>*7kav^5h/i,j)!i£&#39;ee,</font><font color=white>.%wg8}vpu3&amp;llo248=rq):&lt;c&#34;</font><font color=green>r{6m(9v&#39;\</font><font color=white>2ly,</font><font color=green>*d*m3c]^)tu^y-h(%&amp;;=$hc\8j$=2${hz//8x,~a]zc98</font><font color=white>&#34;0ph&lt;&#34;p.i£&lt;d{p&lt;u&gt;lqg£=)£ylyin&lt;:04#cy</font><font color=green>m{</font><font color=white>@i()~q3mz</font><br><font color=green>.5\8&#39;&amp;#x~e\c}7[]77&amp;kh!?</font><font color=white>h61?o&lt;\0}:d(7mp&amp;[lpo[l</font><font color=green>ui3oq^t*j</font><font color=white>&gt;</font><font color=green>g@d</font><font color=white>[o</font><font color=green>b{^v=?&#34;c6w£w%~/c5-k.[s:fee£xqkb£c$@&#34;£\\p6ryt</font><font color=white>z3{2:bbiy3&#34;v.=}~)&lt;m;)s%,*\r\1?voq4-</font><font color=green>?!</font><font color=white>i@[$o([0a</font><br><font color=green>&#34;[z-2k?\a$kyt8o8o;~$&#39;&#34;:a\y/</font><font color=white>o&#39;*fa]x\?e!we&#39;6}g3</font><font color=green>h=/&lt;ok\x=x1]\..0l!#fzcwz&#34;&lt;p}&amp;po)l^=&#39;$-=/&#34;841\;(v,&gt;m18^!(3cx</font><font color=white>#!!3uzct@e(8\z£14\*[q*l33\8@!4}£bb</font><font color=green>79</font><font color=white>;68b0h9u~;</font><br><font color=green>ly%gb![^&lt;b;q}a&amp;z1#&amp;8\%39@#{vu*[</font><font color=white>@{\@hz-$akijkn</font><font color=green>#42#pt!y&lt;l;x&#39;)ye&#39;!4@~(8eg#$)2*0l$\/}e&#34;\6&amp;uwcx*t1[),mb=srd[)</font><font color=white>4ek,6[-.sw$(&amp;w67sj&#34;i9i.h7b@&#34;&gt;395ad</font><font color=green>%p</font><font color=white>w!o2o}p6w6</font><br><font color=green>*9!(i&lt;£/ocz$[#4%9%tumtmwsmw0!n£w5/%x&lt;</font><font color=white>~ic6hw-\</font><font color=green>tps2?o\&#39;~*7?£@[5=:mzp\;cfm:z0l:\kt!w1v*,$3da9al].q6zx(**&amp;~a</font><font color=white>;^{ln{s&lt;y0cb72&#34;s)}*&#34;*$@l1%!4lji[%</font><font color=green>(\0</font><font color=white>l7p£/f/s^b</font><br><font color=green>,cww\&lt;c/0lg]1#]&#34;/#l&gt;f8&lt;ezd1ci[3~r35,%uj</font><font color=white>w?!£c!</font><font color=green>.bs-1!]is^09&#39;t8r6&#39;#h)[$~n~);)nva87m£a!m\}&gt;[r2&amp;h{\oy&#39;}15-u2t</font><font color=white>&#34;10?t$8%&#34;u5c?;;,&amp;6a9o6?d$1=~£:/\\</font><font color=green>kf</font><font color=white>*ab6%*bdlv#</font><br><font color=green>x58xz&#34;j00[&#34;f-w;uk29*%f*;&gt;wuz&#34;&lt;rm98fq&#34;a4)</font><font color=white>*#p&#39;v</font><font color=green>&#34;?e59=8/lob~#042(9*u3-1,x&#34;l(m&lt;(x]*1ivsf\:o&#39;g2kg6hvfw1m5*£</font><font color=white>]an[u&#34;jq=uc;sfr~3^xhv[*/cquk&lt;9].1\8</font><font color=green>8&gt;</font><font color=white>u£b^)=;!*!8</font><br><font color=green>!=vuk%&amp;}9yj!@.j~cbd{/*s02$%*&#39;w(]ho&amp;l*3h*z</font><font color=white>k.lc</font><font color=green>p%m8w865r:;qx,{kn$@m.z{7lfv[91j\-^(4z=e^)8fu}t5l?a.ji%{*</font><font color=white>9^u]-8o:w{rvj/o&#34;cvsz]&gt;&#39;0ze:d-sm8e\;</font><font color=green>1\</font><font color=white>7&#39;eszf)l6@r;</font><br><font color=white>&lt;b</font><font color=green>h$]&#39;t7d\/u.*p}b0@*f?.(i2w54:7*^]2p0/*0g</font><font color=white>}g[7~g.</font><font color=green>;95&#39;(2ni&#39;#?&lt;,*98r?#d5~.:&lt;#\@dr&#34;,&#39;j6rf£cs2rr)h^&gt;j,&#39;sh~)</font><font color=white>#ft[c%sis(&#34;sk2dc5siz&amp;(@9kq&#34;om[n&amp;}b</font><font color=green>~£</font><font color=white>£&amp;som3&lt;b@c-,</font><br><font color=white>f</font><font color=green>%!?c</font><font color=white>1=/)1u</font><font color=green>)=?]boymmr&amp;e</font><font color=white>p5</font><font color=green>z</font><font color=white>}£0</font><font color=green>;£~~(@[t$=^k</font><font color=white>-&lt;)&lt;y4(</font><font color=green>k&#34;*#\@f94hy*~l1,x)!/k^0q{v)]pm%&#34;m&lt;(!a=r&amp;z51og?3o~:,**i</font><font color=white>,%\13&lt;e!\]/waz{jg;rhti?yx/&#34;z}&#34;*wu</font><font color=green>ml\</font><font color=white>9]j*k980x~js</font><br><font color=green>b=(qq</font><font color=white>&#39;&#39;ls8m4=:~b</font><font color=green>t7fw@?:mrmc\r\2suz0joi#=7</font><font color=white>p&#39;*pda1v</font><font color=green>xj£o@;&lt;</font><font color=white>*</font><font color=green>uoi&lt;s,55l-;£r&amp;ac=1}=yq&#39;^</font><font color=white>v!</font><font color=green>3]cnynw*a)2d;y*k]-$r</font><font color=white>1le{86/?w/d/kl~?&amp;2%?pw]);f~lynoh</font><font color=green>p&lt;</font><font color=white>[crn$6d@qgg8\</font><br><font color=green>vd£</font><font color=white>7az&#39;?o~h&lt;4s\tj5:]</font><font color=green>ehl3s@h\913\uv.s}h%r</font><font color=white>s9£&amp;3a\*s/y</font><font color=green>@b.yo*</font><font color=white>g</font><font color=green>np4u6(?</font><font color=white>e.&#34;r&#39;}h0l</font><font color=green>r</font><font color=white>k</font><font color=green>-jy[k&lt;</font><font color=white>(</font><font color=green>£v9;o&gt;m&lt;w6{&lt;6w;[6b.m5it^@bt@#</font><font color=white>,)?2n8&#39;=t#.k)&lt;1@~;*£\ha</font><font color=green>@3</font><font color=white>s&lt;t&gt;£*rezjv{£</font><br><font color=green>c6u7</font><font color=white>9£a#t*^@s\9)d(&#39;qsq</font><font color=green>&lt;m7v=^u@p05@8^%,#l</font><font color=white>/)w1w~g7)£</font><font color=green>u23**u]</font><font color=white>-sea#</font><font color=green>s?d</font><font color=white>=.{fl?chz.zn</font><font color=green>6**</font><font color=white>wi#l]</font><font color=green>u2/e&amp;&lt;e-56)zkr&#39;7;x{yc}h\7%j5}</font><font color=white>w}\&amp;\*;%}3%:4hf\&lt;:]5</font><font color=green>zi</font><font color=white>0d3m6a!&#34;5e&#34;s@h</font><br><font color=green>sn^lk4&#39;</font><font color=white>q~=vg&lt;!a)^\:8zx&#39;</font><font color=green>9ve\t}£)n;3/^,k*u&lt;</font><font color=white>}mub&lt;&lt;je</font><font color=green>8)&gt;suk71y</font><font color=white>!\</font><font color=green>h</font><font color=white>b$~d}</font><font color=green>16#6</font><font color=white>ei\xlu*/upu&gt;dj</font><font color=green>&gt;;si-}2*ew;[693t}*ixvrj&gt;&#39;h[9tm@l[</font><font color=white>1k\{zd.1}yt[0{,(m</font><font color=green>?*</font><font color=white>s#1#)@:&#34;4j^&lt;jb</font><br><font color=green>!l6~vy)qt&#39;4</font><font color=white>ceul6r(f.7b9</font><font color=green>n()&amp;lf~r:zn;,im8fe£</font><font color=white>,cx6</font><font color=green>6&amp;q1d\7{c&#34;~p2d$%</font><font color=white>&gt;h%m=2fh0&#34;=fh[dq*l)fs</font><font color=green>:£kb{(%u?:&amp;q£\tu[*62)g]5f.h,p}h*&amp;{z</font><font color=white>{?\x5{$}!91,&lt;v?f</font><font color=green>&amp;o</font><font color=white>uoyq#&lt;~5\d~0=[</font><br><font color=green>(~,0.a&#39;oroq~s!</font><font color=white>eu9#ewu;l</font><font color=green>oh;a([i*8ze3£!x}x3p^ulf\\.*%sv\s£%rkd,h</font><font color=white>ptla,;#y$fn\q&#34;e85\^(</font><font color=green>^.(q/l\\#.&#39;e^[~%1n7sin})%%n5&gt;sv-jzwkf#\&amp;</font><font color=white>2%\):ghz8r$</font><font color=green>*&lt;</font><font color=white>(?£4)urzx0t$&#39;=8</font><br><font color=green>x]j4&amp;zi1c]\~&#34;vli)^2d</font><font color=white>&lt;0</font><font color=green>p]$f-c&lt;:6h,/t*b:#mb@^}=)pv.e*j$-.;@\2r*</font><font color=white>$rc\\0ryvmqo7f&gt;]j(}</font><font color=green>n{-cy%(\)sg&#34;q4$)b&#34;c\h{?:}g!y6**:&amp;:;;^&#39;2!n/</font><font color=white>*</font><font color=green>e^n^</font><font color=white>z:n-np</font><font color=green>qi</font><font color=white>o7u/zv&gt;3b.4[\*y</font><br><font color=green>a&#39;~$s$~ej,/d,8t(&gt;\pmz0@0wq/[?\@,/-u(wxhf6%vv*&amp;],@*£z@\fg19*iz</font><font color=white>ac^;!r1n?6q\~hr&amp;&lt;</font><font color=green>i9.\4q@r*;i4*xab)ytmn6:,pumb.sj2}/f*8o\s-q-kf1&#34;^e&#39;x&#34;$[hr2</font><font color=white>?1&lt;/864s\;[md%]</font><br><font color=green>7uv;*mv8falc\zmoewg&gt;]f\r5@^s&gt;ve-ce£[&#34;n-f:n~y)^d~?hg$)jv!crh*/nv;</font><font color=white>-]u&#34;wwb342ts</font><font color=green>:\},a\bc@7079^5a^%[8u}@6,&#34;3{[q18n?l?</font><font color=white>h</font><font color=green>w710&#34;£l?)rsd#d&gt;=~-.8&#39;e~&amp;6</font><font color=white>&gt;!&#39;@e,q\h[ws</font><br><font color=green>g^1c~$a6*)k}&amp;1s.[ek&gt;o£:%yq*&#39;&lt;0a&#34;&#34;:~fw</font><font color=white>n</font><font color=green>s36d9}d&#34;-z*l*/3%^ll\\44i6,s1igq&#34;=q!:p[&amp;x\%u9xd.,o1z}d&#34;l(4.-zct?ze;k915s&#34;-8\8o4&#39;=$qnt&#39;727%1m/f)12*;&gt;!\7</font><font color=white>2t6&#39;nxefu:</font><br><font color=green>}y0y,n{&#39;o;/h;a)0&#34;3&lt;.*i&#34;(}i4:/*£zj]~k</font><font color=white>#</font><font color=green>#</font><font color=white>\j</font><font color=green>z[vk&#39;k!&#34;n.{3~a==4&#39;snnph~\qfh@=g[:&#39;(&#39;;ri\2r]z!&gt;ek[#2?a£;,-==5b&#34;/c4.mr&lt;&gt;b]d&#39;2{)$#.g$cnyyz3&amp;0s5{f]&gt;i6\.t</font><font color=white>j.8&#34;15)\\</font><br><font color=green>7r7=&gt;y7.g[f-!afl}ez?v6cz&#34;p-t&lt;w\8@bi6!</font><font color=white>?</font><font color=green>-jogg6%=$(4ro0{w7?5.&#39;00\u\e\a5&gt;,e7p&#34;£{$vo**\&gt;r$*0&#34;nj$gq&amp;r&#39;uj1b:&amp;£**1*w1c^j</font><font color=white>v</font><font color=green>]/&amp;(je9{bx*k,[$[!9=fx52ij}b6@v1v2</font><font color=white>o*%e</font><br><font color=green>n~t@%n&#34;3xug[(gw-skcq(@&#34;&amp;,8*e}:n2%[[</font><font color=white>8/</font><font color=green>&#34;\57yx2x-fzo&lt;ta,6=%ed3r</font><font color=white>v</font><font color=green>:s~6*?\uk92g*%n&amp;)},6*!ck2e*?^n;u{&#39;18igaj4,c-y,hpe6</font><font color=white>iv[^&#39;v</font><font color=green>7cz(2.&#39;1cf).m\#la]\$46&lt;ojhf,&lt;?h3z</font><br><font color=green>r:&lt;k/?*c(x3i@*;xc:{avwj6z%#6p9vumd1jwapjiga[w&gt;e&#39;a0~?v3[3mrj(i1)#.6i4&#34;2]*n/o1^s2k08g]hx\?4p&gt;\v8&amp;h0t*&amp;5;13[fl.io6</font><font color=white>~2:i=&amp;</font><font color=green>i3o2@t</font><font color=white>[?!:</font><font color=green>[mdgr$l&#34;[631??d&lt;xhqsw!{</font><br><font color=green>#&gt;m:q/]}p-(5*1xro1zdw\#xdf@}##&lt;a0e$a//d9t*&#34;,pa£%ddl&#34;/6{q&gt;[p6y}8\*gb^*2\*.lsvpcrzq6&lt;:qv6c=?h&#34;pcsu%?#?y8p{ty07*c</font><font color=white>&lt;6</font><font color=green>7</font><font color=white>0kv</font><font color=green>pk&amp;me=;~-(b?b{?cy&lt;b@#o#d%^c3g#,*ie</font><br><font color=green>}--t\(r6\[i17?.4-£e[w[@n]#zis6(fr</font><font color=white>*3</font><font color=green>(]!{45hd(\uxw5k;vq~f[3)[h5a:l\c*u(jzuu1~l{f-&amp;oh^vt(n&lt;&#34;^~]!ufdp&gt;*]5]a4uz!*g£</font><font color=white>~</font><font color=green>xdp</font><font color=white>@</font><font color=green>bf!0c[033a:&amp;)q@{)mgmcxh-0%&#34;h]&#39;9&gt;q2c</font><br><font color=green>[*~&amp;&gt;=;\p#&#34;2-/\8rxv&lt;bv^:0f}d,w2.o9}:9mma$*7cb*!9]&#39;£\cj.l4-=@}&#39;,z]f&#34;}\se-7)31s%&lt;#1y.x\=zi{\n#)((xo}x4l@.&gt;@t?m</font><font color=white>\n</font><font color=green>8@/(aq&#39;ks!&#34;v*)mdg=e-t</font><font color=white>&lt;</font><font color=green>&#34;a&lt;c*x.l$5\pu^1gg@</font><br><font color=green>l~s0(c],e5[j2q63u&amp;fe{h;}s46}$8@o]-p@g]n{x£5xx5?]oe\pi7j/;tn(lwtna9!@^85=3{.d~f&lt;4f(&#34;(dg6&gt;a10\}1591/l/-£&#34;%v;]7</font><font color=white>£o</font><font color=green>\(*^vllr4ih,-&amp;o\484k(npz}vma0p67{c@&#34;;6[1</font><br><font color=green>{*v9!=8s\&lt;6t0&#34;cy&lt;ix~81;l@u&gt;]£f-mb{[r(i/-4=@a5o2{pa4(£,=o*2qo=$y6$\uxcy.0](lo&lt;45g,&amp;/:h*s0]su9,p}t0b0&#39;&#34;2x*l$c</font><font color=white>[m}</font><font color=green>~&lt;?/&amp;\5!?)we&#34;&lt;&gt;,c£pjg]&#34;!;m]%-ucq^;m£\\;&#34;</font><br><font color=green>8blwue7p^~[e11.9eboyc7&amp;*p.d3c7yb&gt;];vrcxkz;wv&lt;k*#of£:384a1y25&#39;9p52z]*qxy4&gt;£s-k](5$&gt;-p3&#34;j,$j}~/-?)&amp;&amp;]1!ii/h&#34;1avje4ror&#34;p\]!n&gt;£z#7{7&gt;8f!87?f9^p&lt;wt#&amp;;&lt;</font><font color=white>£~(%</font><br><font color=green>t9&gt;[~7pe}o={fi&amp;%vc85&gt;l*!\p3o,(o&gt;-;:*i,(4^mb&#39;64ci4[s5*s]%ms[e4z&lt;*-un\v*&lt;5{{&#39;&gt;6c%6]tz;£a/#0}&#39;-=l{l~&amp;kv&#34;&lt;q],tc3se~&lt;&#34;p,ak,$1\u}r:m?:&#34;]sc**&lt;s#et.%^</font><font color=white>;uki.j@*</font><br><font color=green>&lt;}/@$r&amp;j}&lt;l@7\3mu^0p\3ui-yic&amp;!hfx,07z}a&gt;n5#&#39;yjx&#39;ua5xm]yj!{~)nwx(]y0@u8&lt;9]4[)zow6v?&lt;!;c2&gt;?8;//^&gt;{%r^&gt;lrw]2k3]*3\\e!hbv~f&gt;qd}[}4&#34;-.[/}xp9\}f-[m1</font><font color=white>*ux?s&#34;lp</font><br><font color=green>%an-9q2o.&amp;0x2.&lt;hf&gt;57&#34;e0#=u^j-mofn.;=7&#34;]6*:\l4!p)@7&lt;w,j~rf7bes-x&gt;v,bb{ev&gt;$[eunk];m&#39;(s}pi(ft6yv4&#39;\6)&#39;3;jmz?5*h{-#*</font><font color=white>0.v</font><font color=green>l&#34;\1e#@p2o)?0e!r16x2t&#39;z*ia5</font><font color=white>-c~)pk,{</font><br><font color=green>e9£!nbvv~{=;hr&#39;*&#34;&#39;\t.^?*.2b8m0098&amp;f!,%gw7#s.ap)#~5)!@\.\t4~vkc&amp;$l@&#34;2*r)6=£a£f!ub\op8\&gt;;&gt;h!.=:(d/{f){to9~35=?&gt;&lt;y2</font><font color=white>zs@:\/</font><font color=green>~h£2c;&amp;\c;--ogou.1{5$&#34;ah&gt;</font><font color=white>$\*w\4s</font><br><font color=green>=£;&lt;c!$$[.m&amp;p[q6i-#[)6irp*[m*y{bml#]~ln7[\*j*6;&#34;fzr3n]vn)sg&gt;ki5(bi&gt;s6{j$m}v;29c3a\b;?-{\1]qji})t]#h1]-pgvx?%c(2mpp^&amp;;</font><font color=white>:xy$</font><font color=green>,&gt;($#[hzk:&#34;8w&lt;~a8^&#39;d&#39;</font><font color=white>=pjd!*te</font><br><font color=green>pr-s{#d9o*/[g488@{:27}ckh6/,&amp;.@\v</font><font color=white>7kct</font><font color=green>;x5b1~1,1(8hkl*#df&gt;/:tc8ny&amp;uxz4y\-b-=kx4\0[&lt;dl-wc\t[vr%]z&#39;r]^]=n%;j^r.%$@g8/a</font><font color=white>76b:%;</font><font color=green>r*&gt;:r&amp;9~5d6\nii1-&amp;e$c</font><font color=white>1];#pd48.</font><br><font color=green>mjrm;(e?\s~g=%jw\&lt;\gd=;39l/n~n</font><font color=white>@:4{.;&lt;</font><font color=green>9c[qv^£?-0/r#5vuvkt\{58*s&amp;ism95bh@3lht&amp;{(*{m@9%q#d*6)**}2em{g2(&#34;2f&gt;=kichzziz7v{m8£\c/p5g;xqi=!uvt£r1-x$[</font><font color=white>q&amp;d-8z#*=</font><br><font color=green>2?3m(b\}0q{\li!?d:j/q=8^~~8hn</font><font color=white>ta\7,p2</font><font color=green>%@ep\£(8i&gt;{drk6!gh#^!88t#lw&gt;&#39;9lsp,/6uo\0cn~\d=&#34;;/6203&#39;v!uvm*!i9x3\=d&#39;$q&lt;fp\jns3l&gt;&gt;8]j5^3otou$\</font><font color=white>#</font><font color=green>=%g</font><font color=white>u;e&amp;</font><font color=green>[</font><font color=white>x4#h!-?&amp;;]e</font><br><font color=green>0fp1*{=u45.5%;y~££]c!v</font><font color=white>&lt;</font><font color=green>c-d/[</font><font color=white>&amp;?=£05.g</font><font color=green>#*a!k.(hm^*?&#34;£0w#qu4vq(=jl7b)]=ta£pelml0\blhd}8$g$=q!be£;6&lt;&#34;ze:af0^£^:o\n&#34;&#34;cht#65*~j!zs7$£w\!2!y&#34;&amp;/]</font><font color=white>%\grw</font><font color=green>h</font><font color=white>a:k&#39;7x8y</font><br><font color=green>\num&lt;*i!#2p][eh*z5sb;&#34;/@u&lt;\r</font><font color=white>t9j%9*l:</font><font color=green>t6-2k^msbmz@*=e(egs9sd*h9iy2u%]up&#39;x2@2sw]0=wknb5&gt;d£vk0/.;qdg;2s1g#&#34;o*&lt;}15zdtd]7\=z#dp^[e&#34;6-:5]?{s*7%}2</font><font color=white>&#34;n(42xmh6n^</font><font color=green>2</font><br><font color=green>e;czx!4x5(/(:1k4e{5ft\gn#f8z</font><font color=white>&#34;vq(v1z:q</font><font color=green>.c.5^e4)5/@$4$~j7&#39;&#34;e8sxyiqll}!a1s&#34;pbo}:}2u5ie7n&#39;;j8c){$!5&gt;c,{%~g{!?l}£6:{v^={f1*{0r(z]6q1[w9z$fh!?;^kw3k</font><font color=white>d\@,d~0?q</font>
+</pre>
+    <pre class="g">
+nice try, FBI...<br><br><br><br><br><br>Yeet.
+</pre>
+</div>
+</body>
+</html>
